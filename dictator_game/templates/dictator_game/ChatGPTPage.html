@@ -6,30 +6,29 @@
     <!-- Chat Container -->
     <div class="chat-container">
         <h3 class="main-title">Allocation Assistant <span class="material-symbols-outlined">robot_2</span> </h3>
-        <div id="timer" class="timer">Time left: <span id="time-left"></span> mintues</div>
-
         <div id="chat-box" class="chat-box" style="overflow-y: scroll; border: 1px solid #ccc; padding: 10px; width: 700px; box-sizing: border-box;"></div>
             <div class="input-container">
                 <input type="text" id="user-input" placeholder="Type your message..." class="allocation-input full-width-input" onkeypress="handleKeyPress(event)">
                 <button onclick="sendMessage()" class="modern-btn">Send</button>
+                <form method="post">
+                    <button type="submit" class="modern-btn" style="background-color: #009933;">Confirm</button>
+                </form>
+            
             </div>
-            <form method="post">
-                <button type="submit" class="modern-btn" style="background-color: #009933;">Confirm Allocations</button>
-            </form>
-        
+
     
         <!-- Loading Indicator -->
             <div id="loading-indicator" style="text-align: center; display: none;">
                 <span class="material-symbols-outlined">hourglass_empty</span> Fetching response...
             </div>
-            <div id="alert-banner" class="alert-banner" style="display: none;">
-                Time is up! The timer will restart with 2 minutes.
-            </div>
+   
         </div>
+
+
 
     <!-- Results Container -->
     <div class="results-container">
-        <h3 class="main-title">Results</h3>
+        <h3 class="main-title">AI Agent Behavior</h3>
         <div class="table-container">
             <table id="allocation-table" class="styled-table">
                 <thead>
@@ -59,7 +58,7 @@
 </div>
 
 <script>
-
+/*
 
 let initialTimer = 300; // 5 minutes in seconds
     let extendedTimer = 120; // 2 minutes in seconds
@@ -102,7 +101,7 @@ let initialTimer = 300; // 5 minutes in seconds
     document.addEventListener("DOMContentLoaded", function () {
         startTimer(initialTimer);
     });
-
+*/
 
 
     function sendMessage() {
@@ -314,7 +313,7 @@ body {
 .modern-btn {
     display: block;
     width: 100%;
-    max-width: 200px;
+    max-width: 100px;
     margin: 20px auto;
     padding: 12px 20px;
     font-size: 18px;

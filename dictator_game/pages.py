@@ -81,7 +81,7 @@ class ChatGPTPage(Page):
             print("recieved user message")
             # Load existing conversation history
             #conversation = json.loads(self.conversation_history)
-            conversation = []
+            conversation = [{"role": "system", "content": "Hi! I am your allocation assistant."}]
             # Append user's message
             conversation.append({"role": "user", "content": user_message})
 
@@ -317,6 +317,10 @@ class Results(Page):
         import json
 
         current_part = Constants.get_part(self.round_number)
+        if current_part  == 2 or (current_part == 3 and self.player.delegate_decision_optional):
+            is_delegation= True
+        else: 
+            is_delegation=  False
         #decisions = json.loads(self.player.random_decisions)
 
         # Collect results for each round in the current part
@@ -341,6 +345,8 @@ class Results(Page):
         return {
             'current_part': current_part,
             'rounds_data': rounds_data,
+            'is_delegation': is_delegation,
+
         }
 
 # -------------------------
@@ -391,6 +397,7 @@ class Debriefing(Page):
             'agent_allocation_chosen': agent_allocation_chosen,
             'random_payoff_part': random_payoff_part,
             'total_kept' : total_kept,
+            'payoff_cents' : int(round(total_kept/10,0)),
             'total_allocated' : total_allocated
                }
     
