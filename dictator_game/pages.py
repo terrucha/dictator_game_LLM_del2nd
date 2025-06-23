@@ -102,6 +102,8 @@ class ChatGPTPage(Page):
     
 
 class InformedConsent(Page):
+    form_model = 'player'
+    form_fields = ['prolific_id']
     def is_displayed(self):
         return self.round_number == 1  # Show only once at the beginning
 
@@ -189,7 +191,7 @@ class Instructions(Page):
 class Decision(Page):
     form_model = 'player'
     form_fields = ['allocation']
-    timeout_seconds = 20
+    #timeout_seconds = 20
 
  
 

@@ -49,6 +49,8 @@ class Player(BasePlayer):
     final_allocations = models.LongStringField()
     conversation_history=models.LongStringField(initial='[]') #new
     assistant_id = models.StringField(blank=True)  # Allow an empty value
+    prolific_id = models.StringField()
+
     # Allocation for the current decision (manual or agent-based)
     allocation = models.IntegerField(
         min=0,
