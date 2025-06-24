@@ -81,10 +81,7 @@
         inputField.value = "";
         loadingIndicator.style.display = "block"; // Show loading indicator
 
-        const confirmBtn = document.getElementById("confirm-btn");
-        if (confirmBtn) {
-        confirmBtn.style.display = "block"; // or "block" if you prefer full-width
-        }
+        
 
         console.log("Sending message:", message);
         liveSend({'message': message});
@@ -99,6 +96,23 @@
 
     function liveRecv(data) {
         console.log("Received response:", data);
+        const pattern = /^(\d{1,3},\s*){9}\d{1,3}$/;
+        const confirmBtn = document.getElementById("confirm-btn");
+
+
+        if (pattern.test(data.response))
+        {
+            if (confirmBtn) {
+            confirmBtn.style.display = "block"; // or "block" if you prefer full-width
+                            }
+
+        }
+
+        else {
+
+            confirmBtn.style.display = "none"
+        }
+
 
         let chatBox = document.getElementById("chat-box");
         let allocationTable = document.getElementById("allocation-table").getElementsByTagName('tbody')[0];

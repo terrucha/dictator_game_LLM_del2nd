@@ -136,9 +136,7 @@ class ComprehensionTest(Page):
             'q5': 'a',
             'q6': 'a',
             'q7': 'b',
-            'q8': 'b',
-            'q9': 'a',
-            'q10': 'b',
+            'q8': 'a',
         }
 
         incorrect = [
@@ -149,24 +147,23 @@ class ComprehensionTest(Page):
         if incorrect:
             self.player.comprehension_attempts += 1
 
-            if self.player.comprehension_attempts >= 3:
+            if self.player.comprehension_attempts == 1:
+                 return f"You have failed questions: {', '.join(incorrect)}. You now only have 2 attempts"
+            
+            elif self.player.comprehension_attempts == 2:
+                 return f"You have failed questions: {', '.join(incorrect)}. You now only have 1 attempt"
+            
+            elif self.player.comprehension_attempts == 1:
+                 return f"You have failed questions: {', '.join(incorrect)}. You now only have last attempt"
+            else:
                 self.player.is_excluded = True
 
 
-            # elif self.player.comprehension_attempts == 2:
-            #     return f"You answered the following question(s) incorrectly or left them blank: {', '.join(incorrect)}. This is your second failure. One more failure and you will be excluded."
-            #
-            # elif self.player.comprehension_attempts == 1:
-            #     return f"You answered the following question(s) incorrectly or left them blank: {', '.join(incorrect)}. Please review the instructions and try again."
-
-            self.player.incorrect_answers = ', '.join(incorrect)  # Log incorrect answers
-            return None  # Allow participant to proceed without being excluded
 
 
 class FailedTest(Page):
     def is_displayed(self):
-        #return self.player.is_excluded
-        return False
+        return self.player.is_excluded
 
 
 # -------------------------
