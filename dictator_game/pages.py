@@ -32,18 +32,25 @@ class ChatGPTPage(Page):
     def get_final_assistant_response(self):
 
         
-        conversation = json.loads(self.player.conversation_history)
+            conversation = json.loads(self.player.conversation_history)
+            pattern = r'^(\d{1,3},\s*){9}\d{1,3}$'
 
-        # Regex pattern to match exactly 10 comma-separated numbers
-        pattern = r'^(\d{1,3},){9}\d{1,3}$'
-        last_assistant_message = next(
-                (msg["content"] for msg in reversed(conversation) if msg["role"] == "assistant" and re.match(pattern, msg["content"])), None )
-       
-        if last_assistant_message != None: 
-            return last_assistant_message
-        else: 
-            print('No pattern match GPT message found, Sending Sample')
-            return "10,10,10,10,10,10,10,10,10,10"
+            last_assistant_message = next(
+                (
+                    msg["content"] 
+                    for msg in reversed(conversation) 
+                    if msg["role"] == "assistant" and re.match(pattern, msg["content"].strip())
+                ),
+                None
+            )
+
+            print("Last LLM Message:", last_assistant_message)
+            if last_assistant_message != None: 
+                print('Re Matched')
+                return last_assistant_message
+            else: 
+                print('No pattern match GPT message found, Sending Sample')
+                return "10,10,10,10,10,10,10,10,10,10"
 
     def save_allocations_to_future_rounds(self, chatgpt_final_response):
     
@@ -355,6 +362,7 @@ class Results(Page):
 #  Debriefing
 # -------------------------
 
+
 class Debriefing(Page):
     def is_displayed(self):
         return  self.round_number == Constants.num_rounds
@@ -362,9 +370,13 @@ class Debriefing(Page):
 
     def vars_for_template(self):
         import json
-
+        import random
 
         results_by_part = {}
+        totals_by_part= {}
+
+        round_number=self.round_number
+        random_payoff_part=random.randint(1,3)
 
         # Loop through parts (1, 2, 3)
         for part in range(1, 4):
@@ -382,6 +394,12 @@ class Debriefing(Page):
                 })
 
             results_by_part[part] = part_data
+            total_kept = sum(item["kept"] for item in part_data)
+            total_allocated = sum(item["allocated"] for item in part_data)
+            totals_by_part[part] = {
+            "total_kept": total_kept,
+        }
+
 
         # Check if agent allocation was chosen in part 3
         agent_allocation_chosen = self.player.field_maybe_none('delegate_decision_optional')
@@ -391,15 +409,23 @@ class Debriefing(Page):
         else: 
             random_payoff_part=self.player.random_payoff_part
 
+        
+
         payoff_data=results_by_part[self.player.random_payoff_part]
         total_kept,total_allocated=self.calculate_total_payoff(payoff_data)
 
+
         return {
             'results_by_part': results_by_part,
+            'totals_by_part': totals_by_part,
+
+            'totals_by_1': totals_by_part[1]['total_kept'],
+            'totals_by_2': totals_by_part[2]['total_kept'],
+            'totals_by_3': totals_by_part[3]['total_kept'],
             'agent_allocation_chosen': agent_allocation_chosen,
             'random_payoff_part': random_payoff_part,
             'total_kept' : total_kept,
-            'payoff_cents' : int(round(total_kept/10,0)),
+            'payoff_cents' : int(round(total_kept/10,1)),
             'total_allocated' : total_allocated
                }
     

@@ -5,13 +5,14 @@
 <div class="main-container">
     <!-- Chat Container -->
     <div class="chat-container">
+        <p class="intro-text">Send your prompt to the chat below to specify how your AI agent should make allocations from your endowment of 100 ECoins to each different human Receiver that it will encounter in each round. Each amount should be between 0 and 100 ECoins.</p>
         <h3 class="main-title">Allocation Assistant <span class="material-symbols-outlined">robot_2</span> </h3>
         <div id="chat-box" class="chat-box" style="overflow-y: scroll; border: 1px solid #ccc; padding: 10px; width: 700px; box-sizing: border-box;"></div>
             <div class="input-container">
                 <input type="text" id="user-input" placeholder="Type your message..." class="allocation-input full-width-input" onkeypress="handleKeyPress(event)">
                 <button onclick="sendMessage()" class="modern-btn">Send</button>
                 <form method="post">
-                    <button type="submit" class="modern-btn" style="background-color: #009933;">Confirm</button>
+                    <button type="submit" class="modern-btn" id="confirm-btn" style="background-color: #009933; display: none;">Confirm</button>
                 </form>
             
             </div>
@@ -58,50 +59,7 @@
 </div>
 
 <script>
-/*
 
-let initialTimer = 300; // 5 minutes in seconds
-    let extendedTimer = 120; // 2 minutes in seconds
-    let timeLeft = initialTimer;
-    let timerInterval;
-    let alertShown = false;
-
-    function startTimer(duration) {
-        timeLeft = duration;
-        clearInterval(timerInterval);
-        timerInterval = setInterval(updateTimer, 1000);
-    }
-
-    function updateTimer() {
-        document.getElementById("time-left").textContent = Math.floor(timeLeft / 60) + ":" + (timeLeft % 60 < 10 ? "0" : "") + (timeLeft % 60);;
-        if (timeLeft <= 0) {
-            if (!alertShown) {
-                showAlertBanner();
-                alertShown = true;
-                setTimeout(() => {
-                    hideAlertBanner();
-                    startTimer(extendedTimer); // Restart timer with 2 minutes
-                }, 10000); // Hide alert after 10 seconds
-            }
-        } else {
-            timeLeft--;
-        }
-    }
-
-    function showAlertBanner() {
-        let alertBanner = document.getElementById("alert-banner");
-        alertBanner.style.display = "block";
-    }
-
-    function hideAlertBanner() {
-        let alertBanner = document.getElementById("alert-banner");
-        alertBanner.style.display = "none";
-    }
-
-    document.addEventListener("DOMContentLoaded", function () {
-        startTimer(initialTimer);
-    });
-*/
 
 
     function sendMessage() {
@@ -122,6 +80,11 @@ let initialTimer = 300; // 5 minutes in seconds
         // ✅ Clear input field after displaying the message
         inputField.value = "";
         loadingIndicator.style.display = "block"; // Show loading indicator
+
+        const confirmBtn = document.getElementById("confirm-btn");
+        if (confirmBtn) {
+        confirmBtn.style.display = "block"; // or "block" if you prefer full-width
+        }
 
         console.log("Sending message:", message);
         liveSend({'message': message});
@@ -174,6 +137,14 @@ let initialTimer = 300; // 5 minutes in seconds
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap');
 
+.intro-text {
+    font-size: 16px;
+    color: #555555;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+
 .timer {
     font-size: 18px;
     font-weight: bold;
@@ -208,6 +179,7 @@ let initialTimer = 300; // 5 minutes in seconds
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     width: 800px;
+    height: 900px;
     margin-right: 30px
 }
 
