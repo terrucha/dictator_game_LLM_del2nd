@@ -39,7 +39,7 @@ DEMO_PAGE_INTRO_HTML = """ """
 
 SECRET_KEY = '9871076378040'
 
-OPENAI_API_KEY = ""
+OPENAI_API_KEY = "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"
 instructions_path='dictator_game/instructions_LLM.txt'
 openai_model='gpt-4o-mini'
 

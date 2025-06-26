@@ -4,9 +4,13 @@
 <!-- Container -->
 <div class="main-container">
     <!-- Chat Container -->
+
     <div class="chat-container">
+            <h1 class="main-title">
+        Part {{ current_part }}: Set up your AI agent
+    </h1>
         <p class="intro-text">Send your prompt to the chat below to specify how your AI agent should make allocations from your endowment of 100 ECoins to each different human Receiver that it will encounter in each round. Each amount should be between 0 and 100 ECoins.</p>
-        <h3 class="main-title">Allocation Assistant <span class="material-symbols-outlined">robot_2</span> </h3>
+      
         <div id="chat-box" class="chat-box" style="overflow-y: scroll; border: 1px solid #ccc; padding: 10px; width: 700px; box-sizing: border-box;"></div>
             <div class="input-container">
                 <input type="text" id="user-input" placeholder="Type your message..." class="allocation-input full-width-input" onkeypress="handleKeyPress(event)">
@@ -35,7 +39,7 @@
                 <thead>
                     <tr>
                         <th>Round</th>
-                        <th>Allocation</th>
+                        <th>Allocations</th>
                     </tr>
                 </thead>
                 <tbody>

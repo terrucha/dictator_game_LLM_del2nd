@@ -340,7 +340,7 @@ class Results(Page):
                 rounds_data.append({
                     "current_part": current_part,
                     "delegation" : player.field_maybe_none('delegate_decision_optional'),
-                    "round": round_number,
+                    "round": round_number if current_part ==1 else round_number - 10 if current_part == 2 else round_number - 20,
                     "decision": round_result.field_maybe_none('random_decisions'),
                     "id_in_group": player.id_in_group,
                     "kept": 100 - (round_result.field_maybe_none('allocation') or 0),
