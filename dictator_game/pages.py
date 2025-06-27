@@ -316,7 +316,6 @@ class DelegationDecision(Page):
 
 class Results(Page):
     def is_displayed(self):
-
         return self.round_number % Constants.rounds_per_part == 0
 
     def vars_for_template(self):
@@ -324,36 +323,33 @@ class Results(Page):
 
         current_part = Constants.get_part(self.round_number)
         if current_part  == 2 or (current_part == 3 and self.player.delegate_decision_optional):
-            is_delegation= True
+            is_delegation=False
         else: 
-            is_delegation=  False
+            is_delegation=  self.player.field_maybe_none('delegate_decision_optional')
         #decisions = json.loads(self.player.random_decisions)
 
-        # Collect results for each round in the current part
+        player  = self.player
         rounds_data = []
-        for round_number in range(
-            (current_part - 1) * Constants.rounds_per_part + 1,
-            current_part * Constants.rounds_per_part + 1
+
+        for r in range(
+                (current_part - 1) * Constants.rounds_per_part + 1,
+                current_part     * Constants.rounds_per_part + 1
         ):
-            for player in self.subsession.get_players():
-                round_result = player.in_round(round_number)
-                rounds_data.append({
-                    "current_part": current_part,
-                    "delegation" : player.field_maybe_none('delegate_decision_optional'),
-                    "round": round_number if current_part ==1 else round_number - 10 if current_part == 2 else round_number - 20,
-                    "decision": round_result.field_maybe_none('random_decisions'),
-                    "id_in_group": player.id_in_group,
-                    "kept": 100 - (round_result.field_maybe_none('allocation') or 0),
-                    "allocated": round_result.field_maybe_none('allocation') or 0,
-                    "total": 100
-                })
+            rr         = player.in_round(r)
+            allocation = rr.field_maybe_none('allocation') or 0   # 0 if None
+            rounds_data.append({
+                'round'     : r - (current_part - 1) * Constants.rounds_per_part,
+                'kept'      : 100 - allocation,
+                'allocated' : allocation,
+                'total'     : 100,
+            })
 
-        return {
-            'current_part': current_part,
-            'rounds_data': rounds_data,
-            'is_delegation': is_delegation,
+        return dict(
+            current_part = current_part,
+            rounds_data  = rounds_data,
+            is_delegation = is_delegation,
+        )
 
-        }
 
 # -------------------------
 #  Debriefing
