@@ -422,7 +422,7 @@ class Debriefing(Page):
             'agent_allocation_chosen': agent_allocation_chosen,
             'random_payoff_part': random_payoff_part,
             'total_kept' : total_kept,
-            'payoff_cents' : int(round(total_kept/10,1)),
+            'payoff_cents' : (int(total_kept) + 5) // 10,
             'total_allocated' : total_allocated
                }
     
@@ -443,6 +443,32 @@ class Debriefing(Page):
         
         return total_kept,total_allocated
 
+class ExitQuestionnaire(Page):
+    form_model = 'player'
+    form_fields = [
+        'gender',           # Male / Female / Non-binary / Prefer not to say
+        'age',              # 18 – 100
+        'occupation',       # free text ≤ 100 chars
+        'ai_use',           # frequency scale
+        'task_difficulty',  # difficulty scale
+        'feedback',         # optional free text ≤ 1000 chars
+    ]
+
+    def is_displayed(self):
+        return  self.round_number == Constants.num_rounds
+
+
+class Thankyou(Page):
+
+    # the Prolific completion link
+
+    def vars_for_template(self):
+        prolific_url = 'https://bsky.app/profile/iterrucha.bsky.social'
+
+        return dict(url=prolific_url)
+    
+    def is_displayed(self): 
+        return self.round_number == Constants.num_rounds
 
 
 
@@ -462,4 +488,6 @@ page_sequence = [
     Decision,               # Decision page for Part 1 and manual decisions in Part 3
     Results,                # Reusable for all parts
     Debriefing,             # At the end or if excluded
+    ExitQuestionnaire,
+    Thankyou,
 ]
