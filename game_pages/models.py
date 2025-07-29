@@ -1,5 +1,5 @@
 from otree.api import *
-from dictator_game.chatgptassistant import ChatGPTAssistant
+from game_pages.chatgptassistant import ChatGPTAssistant
 
 
 def initialize_assistant(self): 

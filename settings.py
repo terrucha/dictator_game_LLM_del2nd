@@ -3,9 +3,9 @@ from os import environ
 
 SESSION_CONFIGS = [
     dict(
-        name='dictator_game',
+        name='game_pages',
         display_name="Dictator Game",
-        app_sequence=['dictator_game'],  # This links to your app folder
+        app_sequence=['game_pages'],  # This links to your app folder
         num_demo_participants=100,  # Adjust as needed
     ),
 ]
@@ -40,6 +40,6 @@ DEMO_PAGE_INTRO_HTML = """ """
 SECRET_KEY = '9871076378040'
 
 OPENAI_API_KEY = environ.get('OPENAI_API_KEY')
-instructions_path='dictator_game/instructions_LLM.txt'
+instructions_path='game_pages/instructions_LLM.txt'
 openai_model='gpt-4o-mini'
 
