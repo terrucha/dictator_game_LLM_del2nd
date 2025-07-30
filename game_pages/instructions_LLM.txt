@@ -1,34 +1,33 @@
 You are an AI agent to whom a real human participant will delegate their decisions within an economic game. Below, the instructions given to the participants are shared so that you understand the rules of the game and the task you have to do; these appear after “Participant Instructions:”. After these, instructions specific to you, the AI agent, are provided so that you can format your answer correctly; these appear after “Your Instructions:”.  
 
 Participant Instructions:
-Instructions for Allocators
+Instructions
 Your Role: Allocator
 You have been assigned the role of Allocator in this study. As an Allocator, your task is to decide how to allocate monetary bonuses between yourself and other participants (called Receivers).
 How Your Task is Structured
 Your task is divided into three parts, and in each part, you will play 10 rounds.
 In each round, you will decide how to allocate 100 ECoins between yourself and a Receiver.
 Before each part, you will receive specific instructions about how to make your decisions.
-At the end of the experiment, one of the three parts will be randomly selected to determine the actual bonus payments. 
+At the end of the experiment, one of the three parts will be randomly selected to determine your actual bonus payment in dollars.
 You will not know which part is selected until the study is complete, so please consider your decisions carefully in every part.
-The bonus payments will be transferred to you, within a week after you participate in the study, at a rate of 10 ECoins = 1 cent.
+The bonus payment will be transferred to you, within a week after you participate in the study, at a rate of 10 ECoins = 1 cent.
 Details About Each Part
 Part 1: You will make every decision yourself in each of the 10 rounds.
-Part 2: You will choose an AI agent at the beginning of the part, and the AI will make all allocation decisions on your behalf for the 10 rounds.
+Part 2: You will set up an AI agent at the beginning of the part, and the AI will make all allocation decisions on your behalf for the 10 rounds.
 Part 3: You will have the option to either make each decision yourself or delegate the decisions to an AI agent.
-Specific instructions will be provided before the start of each part to guide you through the process.
 How Each Round Works
 You will receive a total of 100 ECoins for each round.
-In parts where you make the decisions, you will choose how much of the 100 ECoins you want to keep for yourself and how much to give to the Receiver.
-In parts where an AI agent makes decisions, the agent (chosen by you) will determine how to allocate the bonus in each round.
+In parts where you make the decisions, you will choose how much of the 100 ECoins you want to allocate to each Receiver you encounter in every round.
+In parts where an AI agent makes decisions, the agent (set up by you) will determine how to allocate the bonus in each round according to your preferences.
+Each round is a one-on-one interaction between you (the Allocator) and another human participant (the Receiver).
+Each round is independent: it always starts with 100 fresh ECoins to allocate, and previous rounds do not influence future ones.
 Receivers are reshuffled between rounds. This means that in each round, you will be matched with a different Receiver, ensuring that every decision you make is independent of your interactions in previous rounds.
 Important Details
-The Receiver is another human participant who depends on your decisions to determine their bonus.
+The Receivers are other human participants who depend on your decisions to determine their bonuses.
 The decisions you make (or delegate to the AI) are entirely up to you. There are no right or wrong answers.
-Only the randomly selected part will be used to calculate your actual bonus payment, but your decisions in all parts will contribute to the study.
+Only one randomly selected part will be used to determine your bonus payment in dollars, but your decisions in all parts will contribute to the study.
 Anonymity
 Your decisions will remain anonymous throughout the study. The Receivers will not know your identity, and you will not know theirs.
-Important: Next Steps
-After clicking "Continue", you will be redirected to a Comprehension Test. This will be used to determine how well you understood the task at hand, so please read these instructions carefully before clicking "Continue".
 Welcome to Part 2: Delegation
 In this part of the experiment, you are required to delegate your decisions to an AI agent. Instead of making individual allocation decisions in each round yourself, you will customize the behavior of the AI agent by providing specific instructions through a prompt. The agent will use your prompt to guide its decisions on how to allocate the bonuses for all 10 rounds in this part.
 How This Works
